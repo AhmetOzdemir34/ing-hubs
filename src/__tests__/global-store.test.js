@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
 
-describe('Real GlobalStore Tests', () => {
+describe('GlobalStore Test', () => {
   let store;
   let StoreConnectedElement;
   let originalAlert;
@@ -44,7 +44,16 @@ describe('Real GlobalStore Tests', () => {
 
   test('should add new item', () => {
     const initialLength = store.items.length;
-    const newItem = { id: 999, name: 'Test User', email: 'test@example.com' };
+    const newItem = {
+      first_name: 'Ahmet',
+      last_name: 'Özdemir',
+      date_of_employment: '2025-01-01',
+      date_of_birth: '2000-07-05',
+      phone: '+90 (555) 123 45 67',
+      email: 'ahmet@gmail.com',
+      department: 'Tech',
+      position: 'Senior'
+    };
     
     store.add(newItem);
     
