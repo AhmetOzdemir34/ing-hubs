@@ -173,7 +173,7 @@ class AddNewPage extends StoreConnectedElement {
 
             .field-input,
             .field-select {
-                font-size: 16px; /* Prevents zoom on iOS */
+                font-size: 16px;
                 padding: 14px 16px;
             }
 

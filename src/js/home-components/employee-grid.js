@@ -1,6 +1,7 @@
 import { html, css } from 'lit';
 import { StoreConnectedElement } from '../../stores/global-store';
 import store from '../../stores/global-store';
+import './delete-modal';
 
 export class EmployeeGrid extends StoreConnectedElement {
     static properties = {
@@ -170,7 +171,6 @@ export class EmployeeGrid extends StoreConnectedElement {
         const endIndex = startIndex + itemsPerPage;
         const currentPageItems = items.slice(startIndex, endIndex);
         
-        // Toplam sayfa sayısını hesapla
         const totalPages = Math.ceil(items.length / itemsPerPage);
         return html`
             <div style="padding-top: 2rem;">
@@ -239,23 +239,7 @@ export class EmployeeGrid extends StoreConnectedElement {
                     `)}
                 </div>
             </div>
-            ${this.showModal ? html`
-                <div class="modal-overlay" @click=${this._closeModal}>
-                  <div class="modal" @click=${(e) => e.stopPropagation()}>
-                    <h3>${lang.are_you_sure}</h3>
-                    <p>${lang.delete_message}</p>
-                    
-                    <div style="margin-top: 20px;">
-                    <button style="width: 100%; padding: 12px; border: none; background-color: #f97316; color: white; border-radius: 8px;" @click=${this._save}>
-                    ${lang.proceed}
-                      </button>  
-                    <button style="width: 100%; padding: 12px; border: 1px solid #8B5CF6; background-color: #f3f4f6; color: #8B5CF6; border-radius: 8px; margin-top: 10px;" @click=${this._closeModal}>
-                    ${lang.cancel}
-                    </button>
-                    </div>
-                  </div>
-                </div>
-              ` : ''}
+            ${this.showModal ? html`<delete-modal @save-modal=${this._save} @close-modal=${this._closeModal}></delete-modal>` : ''}
             <div class="flex justify-center items-center">
                 <span ?disabled=${paginator <= 1} class="orange pointer mr"
                     @click=${() => this.store.previous()}><</span>
@@ -297,7 +281,7 @@ export class EmployeeGrid extends StoreConnectedElement {
 
     _closeModal() {
         this.showModal = false;
-      }
+    }
 }
 
 customElements.define('employee-grid', EmployeeGrid);
