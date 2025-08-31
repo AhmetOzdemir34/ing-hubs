@@ -3,13 +3,9 @@ import '../stores/global-store.js';
 import './home-page.js';
 import './add-new-page.js';
 import store, { StoreConnectedElement } from '../stores/global-store.js';
-
 import { Router } from '@vaadin/router';
 
-// Router'ı başlat
 const router = new Router(document.querySelector('#outlet'));
-
-// Route'ları tanımla
 router.setRoutes([
     { path: '/', component: 'home-page' },
     { path: '/add-new', component: 'add-new-page' },
@@ -25,26 +21,24 @@ export class MainApp extends StoreConnectedElement {
             margin: 0 auto;
         }
         
-        /* Container styles */
         .bg-white {
             background-color: #ffffff;
         }
 
         .rounded-lg {
-            border-radius: 0.5rem; /* 8px */
+            border-radius: 0.5rem;
         }
 
         .shadow-lg {
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
-        /* Navigation styles */
         .p-2 {
-            padding: 0.5rem; /* 8px */
+            padding: 0.5rem;
         }
 
         .p-6 {
-            padding: 1.5rem; /* 24px */
+            padding: 1.5rem;
         }
 
         .flex {
@@ -59,7 +53,6 @@ export class MainApp extends StoreConnectedElement {
             align-items: center;
         }
 
-        /* Image styles */
         .inline {
             display: inline;
         }
@@ -84,31 +77,30 @@ export class MainApp extends StoreConnectedElement {
             width: 28px;
         }
 
-        /* Margin and spacing styles */
         .ml-4 {
-            margin-left: 1rem; /* 16px */
+            margin-left: 1rem;
         }
 
         .ml-2 {
-            margin-left: 0.5rem; /* 8px */
+            margin-left: 0.5rem;
         }
 
         .ml-6 {
-            margin-left: 1.5rem; /* 24px */
+            margin-left: 1.5rem;
         }
 
         .px-nav {
-            padding-left: 1rem; /* 16px */
-            padding-right: 1rem; /* 16px */
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
 
         .py-nav {
-            padding-top: 0.5rem; /* 8px */
-            padding-bottom: 0.5rem; /* 8px */
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
         }
 
         .rounded {
-            border-radius: 0.25rem; /* 4px */
+            border-radius: 0.25rem;
         }
 
         .bg-blue-800 {
@@ -129,7 +121,6 @@ export class MainApp extends StoreConnectedElement {
             transition-duration: 150ms;
         }
 
-        /* Text styles */
         .text-orange-500 {
             color: #f97316;
         }
@@ -139,7 +130,7 @@ export class MainApp extends StoreConnectedElement {
         }
 
         .pb-1 {
-            padding-bottom: 0.25rem; /* 4px */
+            padding-bottom: 0.25rem;
         }
 
         button {

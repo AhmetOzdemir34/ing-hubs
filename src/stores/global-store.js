@@ -7,42 +7,34 @@ class GlobalStore extends EventTarget {
     constructor() {
       super();
       
-      // Store state'i
       this._state = {
-        items: [...members], // members.js'ten initial değer
+        items: [...members],
         paginator: 1,
         editingId: null,
         lang: en
       };
       
-      // Subscribers listesi
       this._subscribers = new Set();
     }
     
-    // State getter
     get state() {
       return { ...this._state };
     }
     
-    // Items getter
     get items() {
       return [...this._state.items];
     }
     
-    // Paginator getter
     get paginator() {
       return this._state.paginator;
     }
     
-    // State güncelleme
     _setState(updates) {
       const oldState = { ...this._state };
       this._state = { ...this._state, ...updates };
       
-      // Subscribers'ı bilgilendir
       this._notifySubscribers(oldState, this._state);
       
-      // Custom event dispatch et
       this.dispatchEvent(new CustomEvent('state-changed', {
         detail: { oldState, newState: this._state }
       }));
@@ -131,7 +123,7 @@ class GlobalStore extends EventTarget {
     
     connectedCallback() {
       super.connectedCallback();
-      // Store'a abone ol
+      
       this._storeUnsubscribe = store.subscribe((newState, oldState) => {
         this._storeState = newState;
         this.storeStateChanged(newState, oldState);
@@ -141,24 +133,18 @@ class GlobalStore extends EventTarget {
     
     disconnectedCallback() {
       super.disconnectedCallback();
-      // Store aboneliğini iptal et
       if (this._storeUnsubscribe) {
         this._storeUnsubscribe();
       }
     }
     
-    // Store state'ine erişim
     get storeState() {
       return this._storeState;
     }
     
-    // Store'a kolay erişim
     get store() {
       return store;
     }
     
-    // Override edilebilir method - alt sınıflar bu method'u override edebilir
-    storeStateChanged(newState, oldState) {
-      // Component'lerde bu method override edilebilir
-    }
+    storeStateChanged(newState, oldState) {}
   }

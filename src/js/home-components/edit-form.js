@@ -167,7 +167,6 @@ export class EditForm extends StoreConnectedElement {
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             :host {
                 padding: 16px;
@@ -209,21 +208,18 @@ export class EditForm extends StoreConnectedElement {
             }
         }
 
-        /* Tablet */
         @media (min-width: 769px) and (max-width: 1024px) {
             .form-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        /* Desktop */
         @media (min-width: 1025px) {
             .form-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        /* Focus and accessibility improvements */
         .field-input:focus-visible,
         .field-select:focus-visible,
         .btn:focus-visible {
@@ -231,7 +227,6 @@ export class EditForm extends StoreConnectedElement {
             outline-offset: 2px;
         }
 
-        /* Animation for form appearance */
         .form-container {
             animation: fadeInUp 0.5s ease-out;
         }

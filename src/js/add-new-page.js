@@ -156,7 +156,6 @@ class AddNewPage extends StoreConnectedElement {
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             :host {
                 padding: 16px;
@@ -198,21 +197,18 @@ class AddNewPage extends StoreConnectedElement {
             }
         }
 
-        /* Tablet */
         @media (min-width: 769px) and (max-width: 1024px) {
             .form-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        /* Desktop */
         @media (min-width: 1025px) {
             .form-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        /* Focus and accessibility improvements */
         .field-input:focus-visible,
         .field-select:focus-visible,
         .btn:focus-visible {
@@ -220,7 +216,6 @@ class AddNewPage extends StoreConnectedElement {
             outline-offset: 2px;
         }
 
-        /* Animation for form appearance */
         .form-container {
             animation: fadeInUp 0.5s ease-out;
         }
@@ -393,13 +388,7 @@ class AddNewPage extends StoreConnectedElement {
             email: '',
             department: '',
             position: ''
-        }; 
-
-        // Form validation and save logic here
-        this.dispatchEvent(new CustomEvent('form-save', { 
-            detail: this.formData,
-            bubbles: true 
-        }));        
+        };       
         Router.go("/");
     }
 
@@ -414,7 +403,6 @@ class AddNewPage extends StoreConnectedElement {
             department: '',
             position: ''
         };
-        this.dispatchEvent(new CustomEvent('form-cancel', { bubbles: true }));
     }
 }
 

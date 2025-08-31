@@ -56,38 +56,37 @@ export class EmployeeTable extends StoreConnectedElement {
         }
 
         table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-}
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
 
-th {
-    padding: 12px 8px;
-    text-align: left;
-    font-weight: 400;
-    color: #f97316;
-    border-bottom: 1px solid #e5e7eb;
-}
+        th {
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 400;
+            color: #f97316;
+            border-bottom: 1px solid #e5e7eb;
+        }
 
-th:first-child {
-    width: 40px;
-    text-align: center;
-}
+        th:first-child {
+            width: 40px;
+            text-align: center;
+        }
 
-input[type="checkbox"] {
-    cursor: pointer;
-}
+        input[type="checkbox"] {
+            cursor: pointer;
+        }
 
-tr td {
-    padding-top: .8rem;
-    padding-bottom: .8rem;
-}
+        tr td {
+            padding-top: .8rem;
+            padding-bottom: .8rem;
+        }
 
-/* Responsive - sadece yatay scroll */
-.table-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
 
         .modal-overlay {
             position: fixed;
@@ -102,51 +101,50 @@ tr td {
             z-index: 1000;
         }
 
-    /* Modal Content */
-    .modal {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 500px;
-      width: 90%;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      animation: slideIn 0.3s ease;
-    }
+    
+        .modal {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease;
+        }
 
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        }
 
-    /* Buttons */
-    .btn {
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 500;
-    }
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
 
-    .btn-primary {
-      background: #8B5CF6;
-      color: white;
-    }
+        .btn-primary {
+            background: #8B5CF6;
+            color: white;
+        }
 
-    .btn-primary:hover {
-      background: #7C3AED;
-    }
+        .btn-primary:hover {
+            background: #7C3AED;
+        }
 
-    .btn-secondary {
-      background: #f3f4f6;
-      color: #374151;
-    }
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
     `;
 
     constructor() {
@@ -177,23 +175,17 @@ tr td {
         this.store.update(id, { checked: e.target.checked });
         this.requestUpdate();
 
-        // Tüm checkbox'ları kontrol et
         const { items } = this.storeState;
         const checkedItems = items.filter(item => item.checked);
         const selectAllCheckbox = this.shadowRoot.getElementById("selectAll");
         
         if (checkedItems.length === 0) {
-            // Hiçbiri seçili değilse
             selectAllCheckbox.checked = false;
-            //selectAllCheckbox.indeterminate = false;
         } else if (checkedItems.length === items.length) {
             // Hepsi seçiliyse
             selectAllCheckbox.checked = true;
-            //selectAllCheckbox.indeterminate = false;
         } else {
-            // Bazıları seçiliyse (indeterminate state)
             selectAllCheckbox.checked = false;
-            //selectAllCheckbox.indeterminate = true;
         }
     }
     
@@ -214,7 +206,6 @@ tr td {
         const endIndex = startIndex + itemsPerPage;
         const currentPageItems = items.slice(startIndex, endIndex);
         
-        // Toplam sayfa sayısını hesapla
         const totalPages = Math.ceil(items.length / itemsPerPage);
 
         const checkedCount = items.filter(item => item.checked).length;
