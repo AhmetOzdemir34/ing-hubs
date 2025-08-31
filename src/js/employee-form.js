@@ -271,9 +271,7 @@ export class EmployeeForm extends StoreConnectedElement {
     }
 
     save() {
-        console.log("save");
         if (this.type === 'edit'){
-            console.log("edit");
             this.dispatchEvent(new CustomEvent('save-edit', {
                 detail: {
                     formData: this.formData,
@@ -281,10 +279,10 @@ export class EmployeeForm extends StoreConnectedElement {
                 },
                 bubbles: true
             }));
+            store.editingId = null;
             this.closeEdit();
         } 
         else {
-            console.log("add");
             this.dispatchEvent(new CustomEvent('save-add', {
                 detail: {
                     formData: this.formData,
@@ -292,6 +290,7 @@ export class EmployeeForm extends StoreConnectedElement {
                 },
                 bubbles: true
             }));
+            store.editingId = null;
             this.handleCancel();
         }
     }
