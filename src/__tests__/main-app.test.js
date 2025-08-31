@@ -1,4 +1,3 @@
-// main-app.test.js
 import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
 import { Router } from '@vaadin/router';
 import { MainApp } from '../js/main-app.js';
