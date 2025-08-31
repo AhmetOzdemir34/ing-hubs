@@ -27,5 +27,7 @@ The goal was to build a simple employee management web application using **LitEl
 ## Installation
 
 
-`npm install`
-`npm run dev`
+npm install -> install dependecies
+npm run dev -> run dev
+npm test -> testing
+npm run test:coverage -> display coverage ratio
