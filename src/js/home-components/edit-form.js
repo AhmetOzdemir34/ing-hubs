@@ -2,17 +2,14 @@ import { html, css } from 'lit';
 import { StoreConnectedElement } from '../../stores/global-store';
 import store from '../../stores/global-store';
 import { validateForm } from '../../validation.utils';
+import '../employee-form';
 
 export class EditForm extends StoreConnectedElement {
     static properties = {
-        formData: { type: Object },
-        formErrors: { type: Array }
     };
 
     constructor() {
         super();
-        this.formData = {};
-        this.formErrors = [];
     }
 
     static styles = css`
@@ -243,151 +240,34 @@ export class EditForm extends StoreConnectedElement {
         }
     `;
 
-    firstUpdated() {
-        const { items, editingId } = this.storeState;
-        this.formData = items.find(e => e.id === editingId);
-    }
-
     closeEdit() {
         store.clearEditingId();
     }
 
-    save() {
+    save(e) {        
         const { items, editingId } = this.storeState;
 
-        const validationErrors = validateForm(this.formData);
+        const validationErrors = validateForm(e.detail.formData);
         if (validationErrors.length > 0) {
-            this.formErrors = validationErrors;
+            e.detail.formErrors = validationErrors;
             return;
         }
 
-        items.forEach((e) => {
-            if (e.id === editingId) {
-                this.store.update(editingId, this.formData);
+        items.forEach((ex) => {
+            if (ex.id === editingId) {
+                this.store.update(editingId, e.detail.formData);
             }
         });
-
         alert("Update successful!");
-
         this.closeEdit();
     }
 
     render() {
-        const {lang} = this.storeState;
-
-        return html`<div class="form-container">
-                <div class="form-grid">
-                    <div class="field-group">
-                        <label class="field-label">${lang.first_name}</label>
-                        <input 
-                            type="text" 
-                            class="field-input"
-                            .value="${this.formData.first_name}"
-                            @input="${e => this._updateField('first_name', e.target.value)}"
-                        />
-                        ${this.formErrors.includes('first_name') ? html`<p style="margin: 0; padding: 0; color: red; font-size: 12px;">${lang.first_name_error}</p>`: ''}
-                    </div>
-
-                    <div class="field-group">
-                        <label class="field-label">${lang.last_name}</label>
-                        <input 
-                            type="text" 
-                            class="field-input"
-                            .value="${this.formData.last_name}"
-                            @input="${e => this._updateField('last_name', e.target.value)}"
-                        />
-                        ${this.formErrors.includes('last_name') ? html`<p style="margin: 0; padding: 0; color: red; font-size: 12px;">${lang.last_name_error}</p>`: ''}
-                    </div>
-
-                    <div class="field-group date-field">
-                        <label class="field-label">${lang.date_of_employment}</label>
-                        <input 
-                            type="date" 
-                            class="field-input"
-                            .value="${this.formData.date_of_employment}"
-                            @input="${e => this._updateField('date_of_employment', e.target.value)}"
-                        />
-                        ${this.formErrors.includes('date_of_employment') ? html`<p style="margin: 0; padding: 0; color: red; font-size: 12px;">${lang.date_of_employment_error}</p>`: ''}
-                    </div>
-
-                    <div class="field-group date-field">
-                        <label class="field-label">${lang.date_of_birth}</label>
-                        <input 
-                            type="date" 
-                            class="field-input"
-                            .value="${this.formData.date_of_birth}"
-                            @input="${e => this._updateField('date_of_birth', e.target.value)}"
-                        />
-                        ${this.formErrors.includes('date_of_birth') ? html`<p style="margin: 0; padding: 0; color: red; font-size: 12px;">${lang.date_of_birth_error}</p>`: ''}
-                    </div>
-
-                    <div class="field-group">
-                        <label class="field-label">${lang.phone}</label>
-                        <input 
-                            type="tel" 
-                            class="field-input"
-                            .value="${this.formData.phone}"
-                            @input="${e => this._updateField('phone', e.target.value)}"
-                            placeholder="+90 (555) 000 00 00"
-                        />
-                        ${this.formErrors.includes('phone') ? html`<p style="margin: 0; padding: 0; color: red; font-size: 12px;">${lang.phone_error}</p>`: ''}
-                    </div>
-
-                    <div class="field-group">
-                        <label class="field-label">${lang.email}</label>
-                        <input 
-                            type="email" 
-                            class="field-input"
-                            .value="${this.formData.email}"
-                            @input="${e => this._updateField('email', e.target.value)}"
-                            placeholder="example@company.com"
-                        />
-                        ${this.formErrors.includes('email') ? html`<p style="margin: 0; padding: 0; color: red; font-size: 12px;">${lang.email_error}</p>`: ''}
-                    </div>
-
-                    <div class="field-group">
-                        <label class="field-label">${lang.department}</label>
-                        <select 
-                            class="field-select"
-                            .value="${this.formData.department}"
-                            @change="${e => this._updateField('department', e.target.value)}"
-                        >
-                            <option value="">${lang.please_select}</option>
-                            <option value="Analytics">Analytics</option>
-                            <option value="Tech">Tech</option>
-                        </select>
-                        ${this.formErrors.includes('department') ? html`<p style="margin: 0; padding: 0; color: red; font-size: 12px;">${lang.department_error}</p>`: ''}
-                    </div>
-
-                    <div class="field-group">
-                        <label class="field-label">${lang.position}</label>
-                        <select 
-                            class="field-select"
-                            .value="${this.formData.position}"
-                            @change="${e => this._updateField('position', e.target.value)}"
-                        >
-                            <option value="">${lang.please_select}</option>
-                            <option value="Junior">Junior</option>
-                            <option value="Medior">Medior</option>
-                            <option value="Senior">Senior</option>
-                        </select>
-                        ${this.formErrors.includes('position') ? html`<p style="margin: 0; padding: 0; color: red; font-size: 12px;">${lang.position_error}</p>`: ''}
-                    </div>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-primary" @click=${this.save}>
-                    ${lang.save}
-                    </button>
-                    <button @click=${this.closeEdit} class="btn btn-secondary">
-                    ${lang.back}
-                    </button>
-                </div>
-            </div>`;
-    }
-
-    _updateField(field, value) {
-        this.formData = { ...this.formData, [field]: value };
+        return html`<employee-form 
+                        type="edit"
+                        @close-edit=${this.closeEdit}
+                        @save-edit=${this.save}
+                    ></employee-form>`;
     }
 }
 

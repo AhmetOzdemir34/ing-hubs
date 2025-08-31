@@ -2,10 +2,10 @@ import { html, css } from 'lit';
 import { StoreConnectedElement } from '../../stores/global-store';
 import store from '../../stores/global-store';
 import './delete-modal';
+import './home-paginator';
 
 export class EmployeeGrid extends StoreConnectedElement {
     static properties = {
-        currentRoute: { type: String },
         showModal: { type: Boolean },
         deleteId: { type: Number | null }
     };
@@ -240,42 +240,7 @@ export class EmployeeGrid extends StoreConnectedElement {
                 </div>
             </div>
             ${this.showModal ? html`<delete-modal @save-modal=${this._save} @close-modal=${this._closeModal}></delete-modal>` : ''}
-            <div class="flex justify-center items-center">
-                <span ?disabled=${paginator <= 1} class="orange pointer mr"
-                    @click=${() => this.store.previous()}><</span>
-                
-                ${(paginator+1 > totalPages) && !(paginator-4 <= 0) ? html`
-                    <span @click=${() => this.setPaginator(paginator-4)} class="orange pointer" style="padding-left: .5rem; padding-right: .5rem">${paginator-4}</span>
-                `: ''}
-                ${(paginator+2 > totalPages) && !(paginator-3 <= 0) ? html`
-                    <span @click=${() => this.setPaginator(paginator-3)} class="orange pointer" style="padding-left: .5rem; padding-right: .5rem">${paginator-3}</span>
-                `: ''}
-                ${(paginator+3 > totalPages) && !(paginator-2 <= 0) ? html`
-                    <span @click=${() => this.setPaginator(paginator-2)} class="orange pointer" style="padding-left: .5rem; padding-right: .5rem">${paginator-2}</span>
-                `: ''}
-                ${(paginator+4 > totalPages) && !(paginator-1 <= 0) ? html`
-                    <span @click=${() => this.setPaginator(paginator-1)} class="orange pointer" style="padding-left: .5rem; padding-right: .5rem">${paginator-1}</span>
-                `: ''}
-                <span class="selected pointer">${paginator}</span>
-                ${paginator+1 <= totalPages ? html`
-                    <span @click=${() => this.setPaginator(paginator+1)} class="orange pointer" style="padding-left: .5rem; padding-right: .5rem">${paginator+1}</span>
-                `: ''}
-                ${paginator+2 <= totalPages ? html`
-                    <span @click=${() => this.setPaginator(paginator+2)} class="orange pointer" style="padding-left: .5rem; padding-right: .5rem">${paginator+2}</span>
-                `: ''}
-                ${paginator+3 <= totalPages ? html`
-                    <span @click=${() => this.setPaginator(paginator+3)} class="orange pointer" style="padding-left: .5rem; padding-right: .5rem">${paginator+3}</span>
-                `: ''}
-                ${paginator+4 <= totalPages ? html`
-                    <span @click=${() => this.setPaginator(paginator+4)} class="orange pointer" style="padding-left: .5rem; padding-right: .5rem">${paginator+4}</span>
-                `: ''}
-                ${paginator+4 < totalPages ? html`
-                    <span @click=${() => this.setPaginator(paginator+5)} class="orange pointer" style="padding-left: .5rem; padding-right: .5rem">...</span>
-                    <span @click=${() => this.setPaginator(totalPages)} class="orange pointer" style="padding-left: .5rem; padding-right: .5rem">${totalPages}</span>
-                `: ''}
-                <span ?disabled=${paginator >= totalPages} class="orange pointer ml"
-                    @click=${() => this.store.next(totalPages)}>></span>
-            </div>
+            <home-paginator count=${itemsPerPage}></home-paginator>
         `;
     }
 
