@@ -1,4 +1,5 @@
 export const tr = {
+    lang: 'tr',
     employees: "Çalışanlar",
     add_new: "Yeni Ekle",
     employee_list: "Çalışan Listesi",

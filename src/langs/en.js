@@ -1,4 +1,5 @@
 export const en = {
+    lang: 'en',
     employees: "Employees",
     add_new: "Add New",
     employee_list: "Employee List",

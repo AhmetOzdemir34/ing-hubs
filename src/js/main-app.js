@@ -196,8 +196,10 @@ export class MainApp extends StoreConnectedElement {
                             </div>
                         </button>
                         <div class="ml-6">
-                                <img @click=${() => this.setLanguage('tr')} src="./src/assets/Flag_of_Turkey.svg.png" alt="no-image" class="w-28 h-20" style="padding-top: 0.5rem">
-                                <img @click=${() => this.setLanguage('en')} src="./src/assets/Flag_of_the_United_Kingdom.svg" alt="no-image" class="w-28 h-20" style="padding-top: 0.5rem">
+                        ${lang.lang !== 'tr' ? 
+                            html`<img @click=${() => this.setLanguage('tr')} src="./src/assets/Flag_of_Turkey.svg.png" alt="no-image" class="w-28 h-20" style="padding-top: 0.5rem">`: 
+                            html`<img @click=${() => this.setLanguage('en')} src="./src/assets/Flag_of_the_United_Kingdom.svg" alt="no-image" class="w-28 h-20" style="padding-top: 0.5rem">`
+                        }
                         </div>
                     </div>
                 </nav>
