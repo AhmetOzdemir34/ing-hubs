@@ -247,12 +247,6 @@ export class EditForm extends StoreConnectedElement {
     save(e) {        
         const { items, editingId } = this.storeState;
 
-        const validationErrors = validateForm(e.detail.formData);
-        if (validationErrors.length > 0) {
-            e.detail.formErrors = validationErrors;
-            return;
-        }
-
         items.forEach((ex) => {
             if (ex.id === editingId) {
                 this.store.update(editingId, e.detail.formData);

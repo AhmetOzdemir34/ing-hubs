@@ -271,11 +271,14 @@ export class EmployeeForm extends StoreConnectedElement {
     }
 
     save() {
+        this.formErrors = validateForm(this.formData);
+
+        if (!this.formErrors.length) return;
+
         if (this.type === 'edit'){
             this.dispatchEvent(new CustomEvent('save-edit', {
                 detail: {
                     formData: this.formData,
-                    formErrors: this.formErrors
                 },
                 bubbles: true
             }));
@@ -286,7 +289,6 @@ export class EmployeeForm extends StoreConnectedElement {
             this.dispatchEvent(new CustomEvent('save-add', {
                 detail: {
                     formData: this.formData,
-                    formErrors: this.formErrors
                 },
                 bubbles: true
             }));

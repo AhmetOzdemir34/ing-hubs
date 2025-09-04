@@ -240,11 +240,6 @@ class AddNewPage extends StoreConnectedElement {
     }
 
     save(e) {
-        const validationErrors = validateForm(e.detail.formData);
-        if (validationErrors.length > 0) {
-            this.formErrors = validationErrors;
-            return;
-        }
         store.add({...e.detail.formData, id: store.items.length+1, checked: false});
       
         Router.go("/");
